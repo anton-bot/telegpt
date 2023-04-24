@@ -14,3 +14,7 @@ export const HARD_MESSAGE_LIMIT = 32 * 1024;
 if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
     throw new Error("Missing AZURE_STORAGE_CONNECTION_STRING environment variable");
 }
+
+if (!process.env.TELEGRAM_TOKEN) {
+    throw new Error("Missing TELEGRAM_TOKEN environment variable");
+}

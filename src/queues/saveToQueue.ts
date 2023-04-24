@@ -4,7 +4,6 @@ import { Message } from '../types/Message';
 import { encodeMessage } from './encodeMessage';
 
 const DEFAULT_QUEUE_OPTIONS: QueueSendMessageOptions = {
-    visibilityTimeout: 3 * 60, // 3 minutes
     messageTimeToLive: 30 * 60, // 30 minutes
 };
 

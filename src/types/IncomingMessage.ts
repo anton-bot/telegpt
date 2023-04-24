@@ -5,7 +5,11 @@ export type IncomingMessage = {
     text: string;
 }
 
-export function isIncomingMessage(obj: object): obj is IncomingMessage {
+export function isIncomingMessage(obj: unknown): obj is IncomingMessage {
+    if (typeof obj !== "object" || obj === null) {
+        return false;
+    }
+
     return obj
         && "messageId" in obj
         && "chatId" in obj

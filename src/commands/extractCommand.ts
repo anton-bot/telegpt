@@ -1,11 +1,7 @@
 import { Command, isValidCommand } from "../types/Command";
+import { ParsedCommand } from "../types/ParsedCommand";
 
 export const COMMAND_REGEX = /^(\/[a-z]+)(?:@botname)?(?:\s|$)(.*)/i;
-
-type ParsedCommand = {
-    command: Command;
-    text: string;
-};
 
 export function extractCommand(text: string): ParsedCommand {
     const matches = text.match(COMMAND_REGEX);
