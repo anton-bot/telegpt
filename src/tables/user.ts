@@ -1,6 +1,6 @@
 export type User = {
-    PartitionKey: string;
-    RowKey: string;
+    partitionKey: string;
+    rowKey: string;
     username: string;
     gptModel: string;
     credits: number;

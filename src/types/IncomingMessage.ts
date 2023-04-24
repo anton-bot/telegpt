@@ -4,3 +4,15 @@ export type IncomingMessage = {
     username: string;
     text: string;
 }
+
+export function isIncomingMessage(obj: object): obj is IncomingMessage {
+    return obj
+        && "messageId" in obj
+        && "chatId" in obj
+        && "username" in obj
+        && "text" in obj
+        && typeof (obj as IncomingMessage).messageId === "number"
+        && typeof (obj as IncomingMessage).chatId === "number"
+        && typeof (obj as IncomingMessage).username === "string"
+        && typeof (obj as IncomingMessage).text === "string";
+}
