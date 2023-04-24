@@ -8,3 +8,13 @@ export const DEFAULT_PARTITION_KEY = 'telegpt';
 
 // Some models support even smaller input, like 8Kb
 export const HARD_MESSAGE_LIMIT = 32 * 1024;
+
+
+// Check environment variables;
+if (!process.env.AZURE_STORAGE_CONNECTION_STRING) {
+    throw new Error("Missing AZURE_STORAGE_CONNECTION_STRING environment variable");
+}
+
+if (!process.env.TELEGRAM_TOKEN) {
+    throw new Error("Missing TELEGRAM_TOKEN environment variable");
+}

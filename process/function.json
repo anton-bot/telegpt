@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "queueItem",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "incoming-telegram-messages",
+      "connection": "AZURE_STORAGE_CONNECTION_STRING"
+    }
+  ],
+  "scriptFile": "../dist/process/index.js"
+}
