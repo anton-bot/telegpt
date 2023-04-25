@@ -1,6 +1,7 @@
 export enum Command {
   Start = '/start',
   AddBalance = '/addbalance',
+  ChangeModel = '/model',
   ShowAccountDetails = '/account',
   Text = '/text', // Implied default command to just process a text message
 }

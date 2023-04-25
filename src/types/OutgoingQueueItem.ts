@@ -14,8 +14,7 @@ export function isOutgoingQueueItem(obj: unknown): obj is OutgoingQueueItem {
 
   return (
     'response' in obj &&
-    'botMessage' in obj &&
     isOutgoingMessage(obj.response) &&
-    isHistoryMessage(obj.botMessage)
+    ('botMessage' in obj ? isHistoryMessage(obj.botMessage) : true)
   );
 }

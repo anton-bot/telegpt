@@ -4,9 +4,9 @@ import {
   QueueServiceClient,
 } from '@azure/storage-queue';
 import { QueueName } from './QueueName';
-import { Message } from '../types/Message';
 import { encodeMessage } from './encodeMessage';
 import { OutgoingQueueItem } from '../types/OutgoingQueueItem';
+import { IncomingMessage } from '../types/IncomingMessage';
 
 const DEFAULT_QUEUE_OPTIONS: QueueSendMessageOptions = {
   messageTimeToLive: 30 * 60, // 30 minutes
@@ -18,7 +18,7 @@ const queueServiceClient = QueueServiceClient.fromConnectionString(
 
 export function saveToQueue(
   queue: QueueName,
-  message: OutgoingQueueItem,
+  message: IncomingMessage | OutgoingQueueItem,
 ): Promise<QueueSendMessageResponse> {
   const queueClient = queueServiceClient.getQueueClient(queue);
 
