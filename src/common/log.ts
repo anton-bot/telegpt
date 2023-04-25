@@ -7,10 +7,18 @@ export function setLogger(newLogger: (message: string) => void) {
 
 export function log(message: string) {
     logger(message);
-    logs.push(message);
+
+    if (process.env.ENABLE_DEBUG_LOGGING) {
+        logs.push(message);
+    }
 }
 
 export function getSessionLogs() {
+    if (!process.env.ENABLE_DEBUG_LOGGING) {
+        logs.length = 0;
+        return "";
+    }
+
     const text = logs.join("\n") + "\n\n";
     logs.length = 0;
     return text;
