@@ -6,18 +6,18 @@ import { commands } from '../src/commands';
 import { formatResponse } from '../src/telegram/formatResponse';
 import { saveToQueue } from '../src/queues/saveToQueue';
 import { QueueName } from '../src/queues/QueueName';
-import { getSessionLogs, setLogger } from '../src/common/log';
+import { getSessionLogs, log, setLogger } from '../src/common/log';
 
 const queueTrigger: AzureFunction = async function (
   context: Context,
   message: unknown,
 ): Promise<void> {
   try {
+    setLogger(context.log);
+
     if (!isIncomingMessage(message)) {
       throw new Error('Invalid message - cannot be parsed as IncomingMessage');
     }
-
-    setLogger(context.log);
 
     const parsed = extractCommand(message.text);
     const user = await getOrCreateUser(message.chatId, message.username);

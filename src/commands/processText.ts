@@ -40,8 +40,8 @@ export const processText: CommandProcessor = async (message, account) => {
   );
 
   const [promptCredits, responseCredits] = [
-    calculateSpentCredits(model, promptTokens),
-    calculateSpentCredits(model, responseTokens),
+    calculateSpentCredits(model, promptTokens, 'in'),
+    calculateSpentCredits(model, responseTokens, 'out'),
   ];
 
   const threadId =
