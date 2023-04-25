@@ -1,5 +1,15 @@
 import { Model } from '../types/Model';
+import { pricing } from './pricing';
 
-export function calculateSpentCredits(model: Model, tokens: number): number {
-  return 1; // TODO FIXME - do the actual calculation later, e.g. 100 tokens = 500 credits
+export function calculateSpentCredits(
+  model: Model,
+  tokens: number,
+  direction: 'in' | 'out',
+): number {
+  const spentCredits = pricing[model][direction === 'in' ? 'input' : 'output'] * tokens;
+  if (spentCredits < 0) {
+    throw new Error(`Spent credits cannot be negative: ${spentCredits}`);
+  }
+
+  return spentCredits;
 }
