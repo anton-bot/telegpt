@@ -23,10 +23,10 @@ const queueTrigger: AzureFunction = async function (
     const user = await getOrCreateUser(message.chatId, message.username);
     const process = commands[parsed.command];
     const result = await process(message, user, parsed);
-    result.responseText = getSessionLogs() + result.responseText;
     await saveToQueue(QueueName.OutgoingTelegramMessages, {
       response: formatResponse(message, result),
       botMessage: result.botMessage,
+      debug: getSessionLogs(),
     });
   } catch (e) {
     log(`Error processing queue item: ${e?.message} ${JSON.stringify(message)}`);

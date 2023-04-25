@@ -4,7 +4,8 @@ import { isOutgoingQueueItem } from '../src/types/OutgoingQueueItem';
 import { saveMessage } from '../src/history/saveMessage';
 import { getTableClient } from '../src/common/getTableClient';
 import { Table } from '../src/types/Table';
-import { log, setLogger } from '../src/common/log';
+import { getSessionLogs, log, setLogger } from '../src/common/log';
+import { ENABLE_DEBUG_LOGGING } from '../src/constants';
 
 const queueTrigger: AzureFunction = async function (
   context: Context,
@@ -30,6 +31,17 @@ const queueTrigger: AzureFunction = async function (
     await saveMessage(client, botMessage);
   } catch (e) {
     log(`Error processing outgoing queue item: ${e?.message} ${JSON.stringify(queueItem)}`);
+  } finally {
+    if (ENABLE_DEBUG_LOGGING) {
+      const { response, debug } = queueItem as any;
+      if (response?.chatId) {
+        await sendTelegramMessage(
+          process.env.TELEGRAM_TOKEN,
+          response.chatId,
+          (debug ?? '') + getSessionLogs(),
+        );
+      }
+    }
   }
 };
 

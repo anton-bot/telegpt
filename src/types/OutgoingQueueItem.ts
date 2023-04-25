@@ -4,6 +4,7 @@ import { OutgoingMessage, isOutgoingMessage } from './OutgoingMessage';
 export type OutgoingQueueItem = {
   response: OutgoingMessage;
   botMessage: HistoryMessage;
+  debug?: string;
 };
 
 export function isOutgoingQueueItem(obj: unknown): obj is OutgoingQueueItem {

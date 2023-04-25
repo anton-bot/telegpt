@@ -12,6 +12,8 @@ export const HARD_MESSAGE_LIMIT = 32 * 1024;
 // 4 English characters is approximately 1 token
 export const CHARS_TO_TOKENS_RATIO_APPROX = 0.25;
 
+export const ENABLE_DEBUG_LOGGING = process.env.ENABLE_DEBUG_LOGGING;
+
 // Check environment variables;
 const ENV_VARIABLES = ['AZURE_STORAGE_CONNECTION_STRING', 'TELEGRAM_TOKEN', 'OPENAI_API_KEY'];
 
