@@ -1,4 +1,4 @@
 export enum Table {
-    History = "history",
-    Users = "users",
+  History = 'history',
+  Users = 'users',
 }

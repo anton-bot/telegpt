@@ -1,6 +1,6 @@
-import { Command } from "./Command";
+import { Command } from './Command';
 
 export type ParsedCommand = {
-    command: Command;
-    text: string;
+  command: Command;
+  text: string;
 };
