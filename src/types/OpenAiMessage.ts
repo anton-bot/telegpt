@@ -1,6 +1,6 @@
-import { MessageRole } from "./MessageRole"
+import { MessageRole } from './MessageRole';
 
 export type OpenAiMessage = {
-    role: MessageRole;
-    content: string;
+  role: MessageRole;
+  content: string;
 };
