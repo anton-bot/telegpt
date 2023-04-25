@@ -1,4 +1,4 @@
-import { User } from "../tables/user";
+import { User } from "../types/User";
 import { createUser } from "./createUser";
 import { getUser } from "./getUser";
 

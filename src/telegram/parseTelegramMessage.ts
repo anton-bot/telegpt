@@ -11,13 +11,13 @@ export function parseTelegramMessage(update: TelegramUpdate): IncomingMessage {
     if (!message.text) {
         throw new Error(`Invalid Telegram message - does not contain text: ${JSON.stringify(update)}`);
     }
-    
 
     const msg: IncomingMessage = {
         messageId: message.message_id,
         chatId: message.chat.id,
         username: message.from.username,
         text: message.text.slice(0, HARD_MESSAGE_LIMIT),
+        replyTo: message.reply_to_message?.message_id, 
     };
 
     return msg;

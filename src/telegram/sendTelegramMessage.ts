@@ -1,10 +1,12 @@
+import { TelegramMessage } from "../types/TelegramUpdate";
+
 export async function sendTelegramMessage(
     token: string,
     chatId: number,
     text: string,
     replyToMsgId: number | undefined = undefined,
-) {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`,
+): Promise<TelegramMessage> {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`,
         {
             method: 'POST',
             body: JSON.stringify({
@@ -17,4 +19,5 @@ export async function sendTelegramMessage(
             },
         }
     );
+    return await response.json();
 }
