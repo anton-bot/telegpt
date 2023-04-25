@@ -8,6 +8,7 @@ const noop: CommandProcessor = () => Promise.resolve({ responseText: 'TODO' });
 export const commands: Record<Command, CommandProcessor> = {
   [Command.Text]: processText,
   [Command.Start]: noop,
+  [Command.ChangeModel]: noop,
   [Command.AddBalance]: noop,
   [Command.ShowAccountDetails]: showAccountDetails,
 };

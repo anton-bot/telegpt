@@ -54,3 +54,4 @@ GPT as a service via a Telegram bot.
 - test multiple responses to the same message. Should bot cut off messages after the one being responded to? 
 - use schema validation library
 - secondary index on threadId
+- also save bot responses for /account and other such commands
