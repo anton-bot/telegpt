@@ -22,7 +22,7 @@ export function isHistoryMessage(o: unknown): o is HistoryMessage {
     }
 
     return 'chatId' in o
-        && threadId in o
+        && 'threadId' in o
         && 'text' in o
         && 'tokens' in o
         && 'spentCredits' in o

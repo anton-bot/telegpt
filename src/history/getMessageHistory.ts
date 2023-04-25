@@ -8,7 +8,7 @@ export async function getMessageHistory(client: TableClient, chatId: number, rep
     try {
         const prevMessage = await getMessageById(client, chatId, replyTo);
 
-        log(`Retrieved previous message: ${prevMessage}`);
+        log(`Retrieved previous message: ${JSON.stringify(prevMessage)}`);
 
         if (!prevMessage) {
             throw new Error(`Unexpected error: No message found with chat ID ${chatId} and replyTo ${replyTo}`);

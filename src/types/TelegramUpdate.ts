@@ -4,6 +4,11 @@ export type TelegramUpdate = {
     message?: TelegramMessage;
 };
 
+export type TelegramSendMessageResponse = {
+    ok: boolean;
+    result: TelegramMessage;
+};
+
  export type TelegramMessage = {
     message_id: number;
     date: number;
