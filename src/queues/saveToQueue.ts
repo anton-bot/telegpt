@@ -9,7 +9,7 @@ const DEFAULT_QUEUE_OPTIONS: QueueSendMessageOptions = {
 
 const queueServiceClient = QueueServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
-export function saveToQueue(queue: QueueName, message: Message): Promise<QueueSendMessageResponse> {
+export function saveToQueue(queue: QueueName, message: object): Promise<QueueSendMessageResponse> {
     const queueClient = queueServiceClient.getQueueClient(queue);
 
     return queueClient.sendMessage(

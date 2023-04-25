@@ -1,9 +1,11 @@
-import { User } from "../tables/user";
+import { User } from "./User";
 import { IncomingMessage } from "./IncomingMessage";
 import { ParsedCommand } from "./ParsedCommand";
+import { HistoryMessage } from "./HistoryMessage";
 
 export type CommandProcessorResult = {
     responseText: string;
+    botMessage?: HistoryMessage;
 };
 
 export type CommandProcessor = (

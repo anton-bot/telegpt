@@ -1,19 +1,19 @@
 // Incomplete type for Telegram's message format:
 export type TelegramUpdate = {
     update_id: number; // unique ID to identify potential duplicate updates
-    message?: Message;
+    message?: TelegramMessage;
 };
 
-type Message = {
+ export type TelegramMessage = {
     message_id: number;
     date: number;
     text?: string;
-    reply_to_message?: TelegramUpdate;
-    from: User;
-    chat: Chat;
+    reply_to_message?: Omit<TelegramMessage, 'reply_to_message'>;
+    from: TelegramUser;
+    chat: TelegramChat;
 };
 
-type User = {
+type TelegramUser = {
     id: number;
     is_bot: boolean;
     first_name: string;
@@ -21,7 +21,7 @@ type User = {
     username?: string;
 };
 
-type Chat = {
+type TelegramChat = {
     id: number;
     first_name: string;
     last_name: string;

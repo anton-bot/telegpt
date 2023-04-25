@@ -3,6 +3,7 @@ export type IncomingMessage = {
     chatId: number;
     username: string;
     text: string;
+    replyTo?: number;
 }
 
 export function isIncomingMessage(obj: unknown): obj is IncomingMessage {

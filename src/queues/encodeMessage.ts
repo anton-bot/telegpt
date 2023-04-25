@@ -1,7 +1,5 @@
-import { Message } from "../types/Message";
-
 // Azure Queue Storage only accepts base64 encoded strings:
-export function encodeMessage(message: Message): string {
+export function encodeMessage(message: object): string {
     return base64encode(JSON.stringify(message));
 }
 
