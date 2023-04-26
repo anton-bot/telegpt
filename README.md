@@ -53,4 +53,6 @@ GPT as a service via a Telegram bot.
 - secondary index on threadId
 - also save bot responses for /account and other such commands
 - verify users with no username set can still use the bot
-- allow setting a permanent system message
+- check if spent credits are calculated correctly in groups
+- group chats: respond only if spoken to directly
+
