@@ -1,7 +1,11 @@
+import { TelegramInlineKeyboardButton } from './TelegramUpdate';
+
 export type OutgoingMessage = {
   chatId: number;
-  replyTo: number;
+  replyTo: number | string | undefined;
   text: string;
+  answerCallbackQuery?: string;
+  inlineButtons?: TelegramInlineKeyboardButton[][];
 };
 
 export function isOutgoingMessage(obj: unknown): obj is OutgoingMessage {
@@ -11,10 +15,8 @@ export function isOutgoingMessage(obj: unknown): obj is OutgoingMessage {
 
   return (
     'chatId' in obj &&
-    'replyTo' in obj &&
     'text' in obj &&
     typeof obj.chatId === 'number' &&
-    typeof obj.replyTo === 'number' &&
     typeof obj.text === 'string'
   );
 }
