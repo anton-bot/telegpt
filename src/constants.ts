@@ -4,7 +4,7 @@ import { Model } from './types/Model';
 export const DEFAULT_CREDITS = 100000; // 100k credits = $0.20 API spend
 
 // Model selected automatically for new users.
-export const DEFAULT_GPT_MODEL = Model.Gpt4;
+export const DEFAULT_GPT_MODEL = Model.Gpt35Turbo;
 
 // Some models support even smaller input, like 8Kb
 export const HARD_MESSAGE_LIMIT = 32 * 1024;
