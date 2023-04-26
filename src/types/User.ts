@@ -7,4 +7,5 @@ export type User = TableRow & {
   credits: number;
   updatedAt: number;
   isAdmin: boolean;
+  persona?: string;
 };

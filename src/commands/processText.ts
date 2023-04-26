@@ -37,6 +37,7 @@ export const processText: CommandProcessor = async (message, account, command, e
     model,
     message.text,
     prevMessages,
+    account.persona,
   );
 
   const [promptCredits, responseCredits] = [
