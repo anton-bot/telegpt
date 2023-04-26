@@ -10,13 +10,13 @@ export function extractCommand(text: string): ParsedCommand {
     if (isValidCommand(command)) {
       return {
         command,
-        text: matches[2] ?? '',
+        text: (matches[2] ?? '').trim(),
       };
     }
   }
 
   return {
     command: Command.Text,
-    text,
+    text: text.trim(),
   };
 }

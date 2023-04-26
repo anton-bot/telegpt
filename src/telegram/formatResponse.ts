@@ -8,7 +8,9 @@ export function formatResponse(
 ): OutgoingMessage {
   return {
     chatId: message.chatId,
-    replyTo: message.messageId,
+    replyTo: result.answerCallbackQuery ? undefined : message.messageId,
     text: result.responseText,
+    answerCallbackQuery: result.answerCallbackQuery,
+    inlineButtons: result.inlineButtons,
   };
 }

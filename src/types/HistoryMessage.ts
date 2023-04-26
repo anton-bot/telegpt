@@ -8,7 +8,7 @@ export type HistoryMessage = TableRow & {
 
   // Telegram does not provide a unique ID for threads, so we have to make our own.
   // The threadId is the ID of the first message in the thread.
-  threadId: number;
+  threadId: number | string;
 
   text: string;
   tokens: number;

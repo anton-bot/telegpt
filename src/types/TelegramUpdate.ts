@@ -2,6 +2,7 @@
 export type TelegramUpdate = {
   update_id: number; // unique ID to identify potential duplicate updates
   message?: TelegramMessage;
+  callback_query?: TelegramCallbackQuery;
 };
 
 export type TelegramSendMessageResponse = {
@@ -40,6 +41,18 @@ enum ChatType {
   Supergroup = 'supergroup',
   Channel = 'channel',
 }
+
+export type TelegramCallbackQuery = {
+  id: string;
+  from: TelegramUser;
+  message?: TelegramMessage;
+  data: string;
+};
+
+export type TelegramInlineKeyboardButton = {
+  text: string;
+  callback_data: string;
+};
 
 export function isValidTelegramUpdate(o: object): o is TelegramUpdate {
   return 'update_id' in o;

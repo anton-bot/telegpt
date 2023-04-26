@@ -55,3 +55,4 @@ GPT as a service via a Telegram bot.
 - use schema validation library
 - secondary index on threadId
 - also save bot responses for /account and other such commands
+- verify users with no username set can still use the bot

@@ -23,7 +23,7 @@ export function getSessionLogs() {
     return '';
   }
 
-  const text = logs.join('\n').slice(0, MAX_LOG_LENGTH) + '\n\n';
+  const text = logs.join('\n').slice(0, MAX_LOG_LENGTH);
   logs.length = 0;
-  return text;
+  return text.trim() ? text + '\n\n' : '';
 }

@@ -3,7 +3,7 @@ import { MessageRole } from '../types/MessageRole';
 
 type HistoryData = {
   message: IncomingMessage;
-  threadId: number;
+  threadId: number | string;
   promptTokens: number;
   responseTokens: number;
   promptCredits: number;
