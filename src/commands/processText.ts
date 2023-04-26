@@ -10,9 +10,9 @@ import { getTokenLimit } from '../types/Model';
 import { OpenAiMessage } from '../types/OpenAiMessage';
 import { Table } from '../types/Table';
 import { saveMessage } from '../history/saveMessage';
-import { log } from '../common/log';
+import { saveSpentCredits } from '../billing/saveSpentCredits';
 
-export const processText: CommandProcessor = async (message, account) => {
+export const processText: CommandProcessor = async (message, account, command, etag) => {
   if (account.credits <= 0) {
     return {
       responseText:
@@ -57,13 +57,10 @@ export const processText: CommandProcessor = async (message, account) => {
     responseText,
   });
 
-  await saveMessage(client, userMessage);
-
-  // TODO: save billing
-
-  log(
-    `${prevMessages.length} messages in thread ${threadId}, first at ${history[0]?.timestamp}. ${promptTokens}/${responseTokens} tokens spent.`,
-  );
+  await Promise.all([
+    saveMessage(client, userMessage),
+    saveSpentCredits(getTableClient(Table.Users), account, promptCredits + responseCredits, etag),
+  ]);
 
   return {
     responseText,

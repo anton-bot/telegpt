@@ -1,7 +1,10 @@
+import { getTableClient } from '../common/getTableClient';
 import { CommandProcessor } from '../types/CommandProcessor';
 import { Model, getModelName, isValidModel } from '../types/Model';
+import { Table } from '../types/Table';
+import { updateUser } from '../user/updateUser';
 
-export const changeModel: CommandProcessor = async (message, account, parsed) => {
+export const changeModel: CommandProcessor = async (message, account, parsed, etag) => {
   const newModel = parsed.text;
   if (!newModel) {
     return {
@@ -33,7 +36,11 @@ export const changeModel: CommandProcessor = async (message, account, parsed) =>
     };
   }
 
-  // TODO FIXME: actually update model here in db
+  await updateUser(getTableClient(Table.Users), account, etag, (user) => ({
+    ...user,
+    gptModel: newModel,
+  }));
+
   return {
     responseText: `Model changed to ${getModelName(newModel)}.`,
     answerCallbackQuery: message.callbackQuery?.id,

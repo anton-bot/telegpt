@@ -1,16 +1,25 @@
+import { TableClient } from '@azure/data-tables';
 import { User } from '../types/User';
-import { Table } from '../types/Table';
 import { getUserPartitionKey } from './getUserPartitionKey';
-import { getTableClient } from '../common/getTableClient';
 
-export async function getUser(chatId: number): Promise<User | undefined> {
-  const client = getTableClient(Table.Users);
+export type UserWithEtag = {
+  etag: string;
+  user: User | undefined;
+};
 
+export async function getUser(
+  client: TableClient,
+  chatId: number,
+): Promise<UserWithEtag | undefined> {
   const partitionKey = getUserPartitionKey(chatId);
 
   try {
-    return await client.getEntity<User>(partitionKey, chatId.toString());
+    const { etag, ...user } = await client.getEntity<User>(partitionKey, chatId.toString());
+    return { etag, user };
   } catch (e) {
-    return undefined;
+    return {
+      etag: '',
+      user: undefined,
+    };
   }
 }

@@ -7,6 +7,8 @@ import { formatResponse } from '../src/telegram/formatResponse';
 import { saveToQueue } from '../src/queues/saveToQueue';
 import { QueueName } from '../src/queues/QueueName';
 import { getSessionLogs, log, setLogger } from '../src/common/log';
+import { getTableClient } from '../src/common/getTableClient';
+import { Table } from '../src/types/Table';
 
 const queueTrigger: AzureFunction = async function (
   context: Context,
@@ -20,9 +22,10 @@ const queueTrigger: AzureFunction = async function (
     }
 
     const parsed = extractCommand(message.text);
-    const user = await getOrCreateUser(message.chatId, message.username);
+    const client = getTableClient(Table.Users);
+    const { etag, user } = await getOrCreateUser(client, message.chatId, message.username);
     const process = commands[parsed.command];
-    const result = await process(message, user, parsed);
+    const result = await process(message, user, parsed, etag);
     await saveToQueue(QueueName.OutgoingTelegramMessages, {
       response: formatResponse(message, result),
       botMessage: result.botMessage,

@@ -1,16 +1,20 @@
-import { User } from '../types/User';
+import { TableClient } from '@azure/data-tables';
 import { createUser } from './createUser';
-import { getUser } from './getUser';
+import { UserWithEtag, getUser } from './getUser';
 
-export async function getOrCreateUser(chatId: number, username: string | undefined): Promise<User> {
+export async function getOrCreateUser(
+  client: TableClient,
+  chatId: number,
+  username: string | undefined,
+): Promise<UserWithEtag> {
   if (!Number.isFinite(chatId)) {
     throw new Error(`Invalid chat ID ${chatId} when getting/creating new user ${username}`);
   }
 
-  const existingUser = await getUser(chatId);
-  if (existingUser) {
-    return existingUser;
+  const { etag, user } = await getUser(client, chatId);
+  if (user) {
+    return { etag, user };
   }
 
-  return createUser(chatId, username);
+  return createUser(client, chatId, username);
 }

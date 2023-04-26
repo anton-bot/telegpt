@@ -15,4 +15,5 @@ export type CommandProcessor = (
   message: IncomingMessage,
   user: User,
   command: ParsedCommand,
+  etag: string,
 ) => Promise<CommandProcessorResult>;

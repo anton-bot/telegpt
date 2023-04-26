@@ -1,10 +1,9 @@
 import { DEFAULT_GPT_MODEL, DEFAULT_CREDITS } from '../constants';
 import { User } from '../types/User';
-import { Table } from '../types/Table';
 import { getUserPartitionKey } from './getUserPartitionKey';
-import { getTableClient } from '../common/getTableClient';
+import { TableClient } from '@azure/data-tables';
 
-export async function createUser(chatId: number, username: string) {
+export async function createUser(client: TableClient, chatId: number, username: string) {
   if (!Number.isFinite(chatId)) {
     throw new Error(`Invalid chat ID ${chatId} when creating new user ${username}`);
   }
@@ -20,7 +19,6 @@ export async function createUser(chatId: number, username: string) {
     isAdmin: false,
   };
 
-  const client = getTableClient(Table.Users);
-  await client.createEntity(newUser);
-  return newUser;
+  const { etag } = await client.createEntity(newUser);
+  return { etag, user: newUser };
 }
