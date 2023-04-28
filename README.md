@@ -5,7 +5,7 @@ GPT as a service via a Telegram bot.
 
 Talk to [@gptlink_bot](https://t.me/gptlink_bot) on Telegram.
 
-## Bot ommands ## 
+## Bot commands ## 
 
 Just send a message to the bot to talk. To continue the conversation, use the "reply" feature in Telegram (swipe on the bot's message).
 
@@ -25,3 +25,4 @@ Just send a message to the bot to talk. To continue the conversation, use the "r
 - verify users with no username set can still use the bot
 - check if spent credits are calculated correctly in group chats
 - group chats: respond only if bot is mentioned or replied to
+- connect billing but not stripe (crypto?)
