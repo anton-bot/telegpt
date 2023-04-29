@@ -7,6 +7,7 @@ import { Table } from '../src/types/Table';
 import { getSessionLogs, log, setLogger } from '../src/common/log';
 import { ENABLE_DEBUG_LOGGING } from '../src/constants';
 import { answerCallbackQuery } from '../src/telegram/answerCallbackQuery';
+import { getTelegramToken } from '../src/telegram/getTelegramToken';
 
 const queueTrigger: AzureFunction = async function (
   context: Context,
@@ -20,12 +21,14 @@ const queueTrigger: AzureFunction = async function (
 
     const { response, botMessage } = queueItem;
 
+    const telegramToken = getTelegramToken(response.chatId);
+
     if (response.answerCallbackQuery) {
-      await answerCallbackQuery(process.env.TELEGRAM_TOKEN, response.answerCallbackQuery);
+      await answerCallbackQuery(telegramToken, response.answerCallbackQuery);
     }
 
     const sentMessage = await sendTelegramMessage(
-      process.env.TELEGRAM_TOKEN,
+      telegramToken,
       response.chatId,
       response.text,
       response.replyTo,
@@ -45,7 +48,7 @@ const queueTrigger: AzureFunction = async function (
       const { response, debug } = queueItem as any;
       const logs = (debug ?? '') + getSessionLogs();
       if (logs.trim() && response?.chatId) {
-        await sendTelegramMessage(process.env.TELEGRAM_TOKEN, response.chatId, 'Logs: \n\n' + logs);
+        await sendTelegramMessage(getTelegramToken(), response.chatId, 'Logs: \n\n' + logs);
       }
     }
   }
